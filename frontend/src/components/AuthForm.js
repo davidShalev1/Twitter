@@ -11,8 +11,16 @@ class AuthForm extends Component{
         }
     }
 
-handleChange =(e) => {
+handleChange = e => {
     this.setState({[e.target.name]: e.target.value});
+}
+handleSubmit = e =>{
+    e.preventDefault();
+    const authType = this.props.signup ? "signup" : "signin";
+    //console.log(this.state);
+    this.props.onAuth(authType,this.state).then(() =>{
+        console.log("logged in");
+    });
 }
 
     render(){
@@ -58,6 +66,12 @@ handleChange =(e) => {
                                 />
                             </div>
                         )}
+                        <button 
+                            type="submit" 
+                            className="btn btn-primary btn-block btn-lg"
+                        >
+                            {buttonText}
+                        </button>
                 </form>
                     </div>
                 </div>

@@ -13,9 +13,8 @@ const express = require("express"),
 
 
 app.use(cors());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(bodyParser.json());
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users/:id/messages",

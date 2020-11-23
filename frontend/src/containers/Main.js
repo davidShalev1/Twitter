@@ -3,17 +3,22 @@ import {connect} from "react-redux";
 import {withRouter,Redirect,Switch,Route} from "react-router-dom";
 import HomePage from "../components/HomePage";
 import AuthForm from "../components/AuthForm";
-import {authUser} from "../store/actions/auth";
+import {authUser, removeError} from "../store/actions/auth";
 
 const Main = props =>{
-    const {authUser} = props;
+    const {authUser,errors,removeError,currentUser} = props;
     return(
         <div className="container">
             <Switch>
-                <Route exact path="/" render={(props)=><HomePage {...props} /> } />
+                <Route exact path="/" render={(props)=>
+                    <HomePage currentUser={currentUser} {...props}   /> 
+                    } 
+                />
                 <Route exact path="/signin" render={props => {
                     return (
-                        <AuthForm 
+                        <AuthForm
+                            removeError={removeError} 
+                            errors={errors}
                             onAuth={authUser}
                             {...props} 
                             heading="Welcome back!!!"
@@ -25,6 +30,8 @@ const Main = props =>{
                     return (
                         <AuthForm 
                             signup
+                            removeError= {removeError}
+                            errors= {errors}
                             onAuth={authUser}
                             {...props}
                             heading="welcome!!!"
@@ -39,9 +46,10 @@ const Main = props =>{
 
 function mapStateToProps(state){
     return{
-        currentUser:state.currentUser
+        currentUser:state.currentUser,
+        errors:state.errors
     }
 }
 
-export default withRouter(connect(mapStateToProps,{authUser})(Main));
+export default withRouter(connect(mapStateToProps,{authUser,removeError})(Main));
 

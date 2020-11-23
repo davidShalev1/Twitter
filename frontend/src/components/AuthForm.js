@@ -17,21 +17,33 @@ handleChange = e => {
 handleSubmit = e =>{
     e.preventDefault();
     const authType = this.props.signup ? "signup" : "signin";
-    //console.log(this.state);
     this.props.onAuth(authType,this.state).then(() =>{
+        this.props.history.push("/");
         console.log("logged in");
+    }).catch(() =>{
+        return;
     });
 }
 
     render(){
         const {email,username,password,profileImgUrl} = this.state;
-        const {buttonText,heading,signup} = this.props;
+        const {buttonText,heading,signup,errors,removeError,history} = this.props;
+
+        history.listen(()=>{
+            removeError();
+        })
+
         return(
             <div>
                 <div className="row justify-content-md-center text-center">
                     <div className="col-md-6">
                 <form onSubmit={this.handleSubmit}>
                       <h2>{heading}</h2>
+                      {errors.message &&
+                        <div className="alert alert-danger">
+                            {errors.message}
+                        </div>
+                       }
                       <label htmlFor="email">Email:</label>
                       <input className="form-control" 
                         id="email" 

@@ -1,10 +1,31 @@
 import { apiCall } from "../../services/api";
 import { SET_CURRENT_USER } from "../actionsTypes";
+import {ADD_ERROR,REMOVE_ERROR} from "../actionsTypes";
 
 export function setCurrentUser(user) {
     return {
         type: SET_CURRENT_USER,
         user
+    }
+}
+
+export function addError(error){
+    return {
+        type:ADD_ERROR,
+        error
+    }
+}
+
+export function removeError(){
+    return {
+        type:REMOVE_ERROR
+    }
+}
+
+export function logout(){
+    return dispatch => {
+        localStorage.clear();
+        dispatch(setCurrentUser({}));
     }
 }
 
@@ -15,10 +36,12 @@ export function authUser(type, userData) {
                 .then(({ token, ...user }) => {
                     localStorage.setItem("jwt-token", token);
                     dispatch(setCurrentUser(user));
+                    dispatch(removeError());
                     resolve();
                 }
             )
             .catch(err =>{
+                dispatch(addError(err.message));
                 reject();
             })
             })

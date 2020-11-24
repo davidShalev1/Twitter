@@ -10,9 +10,9 @@ export function loadMessages(messages){
 }
 export function fetchMessages(messages){
     return dispatch =>{
-        return apiCall("GET","/api/messages")
+        return apiCall("get","/api/messages")
         .then(res => dispatch(loadMessages(res)))
-        .catch(err => addError(err.message));
+        .catch(err => dispatch(addError(err.message)));
     }
 
 }

@@ -4,13 +4,14 @@ import {withRouter,Redirect,Switch,Route} from "react-router-dom";
 import HomePage from "../components/HomePage";
 import AuthForm from "../components/AuthForm";
 import {authUser, removeError} from "../store/actions/auth";
+import withAuth from "../hocs/withAuth";
 
 const Main = props =>{
     const {authUser,errors,removeError,currentUser} = props;
     return(
         <div className="container">
             <Switch>
-                <Route exact path="/" render={(props)=>
+                <Route exact path="/" render={props=>
                     <HomePage currentUser={currentUser} {...props}   /> 
                     } 
                 />
@@ -39,6 +40,9 @@ const Main = props =>{
                         />
                     )
                 }} />
+                <Route exact path="/users/:id/messages/new" 
+                    component={withAuth(messageForm)}
+                />
             </Switch>
         </div>
     )

@@ -7,17 +7,19 @@ const MessageItem = props => {
     const {date,username,profileImgUrl,text} = props;
     return(
         <div>
-            <img src={profileImgUrl || DefaultProfileImg} 
-                alt={username} width="100" height="100" className="timeline-image"/>
-            <div className="message-area">
-                <Link to="/">@{username} &nbsp;</Link>
-                <span className="text-muted">
-                    <Moment className="text-muted" format="Do MMM YYYY">
-                        {date}
-                    </Moment>
-                </span>
-                <p>{text}</p>
-            </div>
+            <li className="list-group-item">
+                <img src={profileImgUrl || DefaultProfileImg} 
+                    alt={username} width="100" height="100" className="timeline-image"/>
+                <div className="message-area">
+                    <Link to="/">@{username} &nbsp;</Link>
+                    <span className="text-muted">
+                        <Moment className="text-muted" format="Do MMM YYYY">
+                            {date}
+                        </Moment>
+                    </span>
+                    <p>{text}</p>
+                </div>
+            </li>
         </div>
     )
 }

@@ -1,9 +1,11 @@
-import {REMOVE_MESSAGES,LOAD_MESSAGES} from "../actionsTypes";
+import {REMOVE_MESSAGES,LOAD_MESSAGES, REMOVE_MESSAGE} from "../actionsTypes";
 
 export default (state=[],action) => {
     switch(action.type){
         case LOAD_MESSAGES:
             return [...action.messages];
+            case REMOVE_MESSAGE:
+                return state.filter(message => message._id !== action.id);
         default:
             return state;
     }

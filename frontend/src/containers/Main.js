@@ -5,6 +5,7 @@ import HomePage from "../components/HomePage";
 import AuthForm from "../components/AuthForm";
 import {authUser, removeError} from "../store/actions/auth";
 import withAuth from "../hocs/withAuth";
+import messageForm from "./MessageForm";
 
 const Main = props =>{
     const {authUser,errors,removeError,currentUser} = props;

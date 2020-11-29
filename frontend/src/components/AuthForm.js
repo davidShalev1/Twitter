@@ -70,11 +70,14 @@ handleSubmit = e =>{
                                 name="username"
                                 />
                                 <label htmlFor="profileImgUrl">profileImgUrl:</label>
-                            <input className="form-control" 
+                            <input 
+                                className="form-control"
+                                autoComplete="off" 
                                 id="profileImgUrl" 
                                 type="text"
                                 onChange={this.handleChange}
                                 name="profileImgUrl"
+                                value={profileImgUrl}
                                 />
                             </div>
                         )}

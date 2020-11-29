@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import DefaultProfileImg from "../images/default-profile-image.jpg";
 
 const MessageItem = props => {
-    const {date,username,profileImgUrl,text,removeMessage} = props;
+    const {date,username,profileImgUrl,text,removeMessage,isCorrectUser} = props;
     return(
         <div>
             <li className="list-group-item">
@@ -18,9 +18,12 @@ const MessageItem = props => {
                         </Moment>
                     </span>
                     <p>{text}</p>
-                    <a className="btn btn-danger" onClick={removeMessage}>
-                        Delete
-                    </a>
+                    {isCorrectUser && (
+                        <a className="btn btn-danger" onClick={removeMessage}>
+                             Delete
+                         </a>
+                    )}
+                    
                 </div>
             </li>
         </div>
